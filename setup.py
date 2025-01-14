@@ -21,7 +21,7 @@ VERSION = None
 
 # What packages are required for this module to be executed?
 REQUIRED = [
-    "biopython<1.80",
+    "biopython",
     "goatools",
     "seaborn",
     "psutil",
