@@ -15,7 +15,7 @@ import uuid
 from natsort import natsorted
 import warnings
 from Bio import SeqIO
-from distutils.version import LooseVersion
+from packaging.version import Version
 
 with warnings.catch_warnings():
     warnings.simplefilter("ignore")
@@ -300,8 +300,8 @@ def parseEggNoggMapper(input, output, GeneDict):
     lib.log.info("EggNog version parsed as {}".format(version))
     if (
         version
-        and LooseVersion(version) > LooseVersion("2.0.0")
-        and version < LooseVersion("2.0.5")
+        and Version(version) > Version("2.0.0")
+        and version < Version("2.0.5")
     ):
         lib.log.error(
             "Unable to parse emapper results from v{}, please use either v1.0.3 or >=v2.0.5".format(
@@ -320,9 +320,9 @@ def parseEggNoggMapper(input, output, GeneDict):
     )
     Definitions = {}
     # indexes from header file
-    if LooseVersion(version) < LooseVersion("2.0.0"):  # version < 2.0.0
+    if Version(version) < Version("2.0.0"):  # version < 2.0.0
         IDi, DBi, OGi, Genei, COGi, Desci, ECi = getEggNogHeaders(input)
-    elif LooseVersion(version) < LooseVersion("2.1.2"):  # version < 2.1.2
+    elif Version(version) < Version("2.1.2"):  # version < 2.1.2
         IDi, DBi, OGi, Genei, COGi, Desci, ECi = getEggNogHeadersv2(input)
     else:
         IDi, DBi, OGi, Genei, COGi, Desci, ECi = getEggNogHeadersv212(input)
@@ -347,7 +347,7 @@ def parseEggNoggMapper(input, output, GeneDict):
                         and not morethanXnumbers(cols[Genei], 3)
                     ):
                         Gene = cols[Genei]
-                if LooseVersion(version) < LooseVersion("2.0.0"):
+                if Version(version) < Version("2.0.0"):
                     EC = None
                     DB = cols[DBi].split("[")[0]
                     OGs = cols[OGi].split(",")
@@ -356,7 +356,7 @@ def parseEggNoggMapper(input, output, GeneDict):
                         if DB in x:
                             NOG = prefix + x.split("@")[0]
                     COGs = cols[COGi].replace(" ", "")
-                elif LooseVersion(version) < LooseVersion(
+                elif Version(version) < Version(
                     "2.1.2"
                 ):  # means we have v2 or great
                     try:

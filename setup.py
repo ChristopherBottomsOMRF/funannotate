@@ -17,7 +17,6 @@ DESCRIPTION = "funannotate: eukaryotic genome annotation pipeline"
 URL = "https://github.com/nextgenusfs/funannotate"
 EMAIL = "nextgenusfs@gmail.com"
 AUTHOR = "Jon Palmer"
-REQUIRES_PYTHON = ">=3.6.0, <3.10"
 VERSION = None
 
 # What packages are required for this module to be executed?
@@ -34,6 +33,7 @@ REQUIRED = [
     "scikit-learn",
     "scipy",
     "distro",
+    "packaging",
 ]
 
 # What packages are optional?
@@ -111,7 +111,6 @@ setup(
     long_description_content_type="text/markdown",
     author=AUTHOR,
     author_email=EMAIL,
-    python_requires=REQUIRES_PYTHON,
     url=URL,
     packages=find_packages(exclude=("tests",)),
     entry_points={
